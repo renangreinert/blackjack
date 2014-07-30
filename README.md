@@ -1,4 +1,0 @@
-blackjack
-=========
-
-BlackJack simulator
