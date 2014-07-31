@@ -13,6 +13,7 @@ class Card
 
 public:
 	Card();
+	Card( EVALUES val, ESUIT suit);
 	virtual ~Card();
 	ESUIT mSuit;
 	EVALUES mValue;

@@ -2,15 +2,14 @@
 #define _DECKFACTORY_H_
 
 #include "card.h"
+#include "cardsfuncs.h"
 
 class DeckFactory
 {
 
 public:
-	DeckFactory();
-	virtual ~DeckFactory();
-
-	static Card* CreateDeck();
+	static constCardsVec_t CreateDeck();
+	static void DestroyDeck( constCardsVec_t& deck );
 
 };
 #endif

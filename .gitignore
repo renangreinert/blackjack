@@ -1,0 +1,5 @@
+Debug
+/proj/blackjack/*.suo
+/proj/blackjack/*.sdf
+/proj/blackjack/blackjack.vcxproj.user
+/proj/blackjack/ipch/blackjack-2a6279f6/*.ipch

@@ -4,10 +4,12 @@
 
 enum ESUIT
 {
-	SPADES,
+	SPADES = 0,
 	DIAMONDS,
 	HEARTS,
-	CLUBS
+	CLUBS,
+
+	TOTAL_SUITS
 };
 #endif 
 

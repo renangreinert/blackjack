@@ -6,6 +6,10 @@ Card::Card()
 {
 }
 
+Card::Card( EVALUES val, ESUIT suit): mValue( val ), mSuit( suit )
+{
+}
+
 
 Card::~Card()
 {
@@ -31,7 +35,7 @@ std::vector< int > Card::GetNumericalValue() const
 	case VAL_8:
 	case VAL_9:
 	case VAL_10:
-		retval.push_back( (int)mValue ) ;
+		retval.push_back( (int)mValue - (int)VAL_2 + 2 ) ;
 		break;
 
 	case QUEEN:
