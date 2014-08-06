@@ -43,6 +43,8 @@ public:
 
 	int Join( Table& table );
 
+	void SetTable( Table* table ){ mpTable = table; }
+
 	typedef struct pile_t
 	{
 		class Bet bet;

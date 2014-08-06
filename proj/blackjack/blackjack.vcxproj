@@ -80,6 +80,7 @@
     <ClCompile Include="..\..\src\composition.cpp" />
     <ClCompile Include="..\..\src\dealer.cpp" />
     <ClCompile Include="..\..\src\deckfactory.cpp" />
+    <ClCompile Include="..\..\src\gamemanager.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\player.cpp" />
     <ClCompile Include="..\..\src\table.cpp" />
@@ -93,6 +94,7 @@
     <ClInclude Include="..\..\src\deckfactory.h" />
     <ClInclude Include="..\..\src\ESUIT.h" />
     <ClInclude Include="..\..\src\EVALUES.h" />
+    <ClInclude Include="..\..\src\gamemanager.h" />
     <ClInclude Include="..\..\src\player.h" />
     <ClInclude Include="..\..\src\table.h" />
   </ItemGroup>

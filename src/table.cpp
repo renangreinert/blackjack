@@ -2,6 +2,7 @@
 #include "player.h"
 #include "card.h"
 #include "dealer.h"
+#include "composition.h"
 
 Table::Table()
 {
@@ -11,6 +12,8 @@ Table::Table()
 
 Table::~Table()
 {
+	delete mpComposition;
+	mpComposition = NULL;
 }
 
 
@@ -19,7 +22,13 @@ Table::~Table()
 
 const Card* Table::GetCard()
 {
-	return  NULL;
+	int ret = 0;
+	const Card* card = NULL;
+
+	ret = mpComposition->GetCard( card );
+
+	//TODO - what to do in the case of an error?
+	return  card;
 }
 
 
@@ -40,5 +49,6 @@ void Table::Restart()
 int Table::AddPlayer( Player* player )
 {
 	mpPlayers.push_back( player );
+	player->SetTable( this );
 	return 1;
 }

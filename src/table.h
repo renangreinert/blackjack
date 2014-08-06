@@ -22,6 +22,10 @@ public:
 
 	Dealer* GetDealer(){ return mpDealer; }
 
+	void SetCards( Composition* composition ){ mpComposition = composition; }
+
+	std::vector< Player* > GetPlayers(){ return mpPlayers; }
+
 private:
 	Composition* mpComposition;
 	Dealer* mpDealer;
