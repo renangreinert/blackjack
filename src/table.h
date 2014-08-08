@@ -8,10 +8,16 @@ class Dealer;
 class Composition;
 class Card;
 
+enum ESoftRule
+{
+	SOFT_STAND,
+	SOFT_HIT
+};
+
 class Table
 {
 public:
-	Table();
+	Table( ESoftRule softRule = SOFT_STAND, float jackpotPayment = 2.0f );
 	virtual ~Table();
 
 	const Card* GetCard();
@@ -20,16 +26,24 @@ public:
 
 	int AddPlayer( Player* player );
 
-	Dealer* GetDealer(){ return mpDealer; }
+	
 
 	void SetCards( Composition* composition ){ mpComposition = composition; }
 
 	std::vector< Player* > GetPlayers(){ return mpPlayers; }
 
+	Dealer* GetDealer(){ return mpDealer; }
+
+	ESoftRule GetSoftRule(){ return mSoftRule; }
+
 private:
-	Composition* mpComposition;
-	Dealer* mpDealer;
+	ESoftRule		mSoftRule;
+	float			mJackpotPayment;
+	Composition*	mpComposition;
+	Dealer*			mpDealer;
+
 	std::vector< Player* > mpPlayers;
+
 
 };
 

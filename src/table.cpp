@@ -4,20 +4,15 @@
 #include "dealer.h"
 #include "composition.h"
 
-Table::Table()
+Table::Table( ESoftRule softRule, float jackpotPayment ): mSoftRule( softRule ), mJackpotPayment( jackpotPayment )
 {
 }
-
-
 
 Table::~Table()
 {
 	delete mpComposition;
 	mpComposition = NULL;
 }
-
-
-
 
 
 const Card* Table::GetCard()
@@ -37,6 +32,16 @@ const Card* Table::GetCard()
  */
 int Table::Play()
 {
+	mpDealer->DealCards();
+
+	for ( std::vector< Player* >::iterator iter = mpPlayers.begin();
+		iter != mpPlayers.end();
+		++iter )
+	{
+		while ( (*iter)->Play() );
+	}
+
+	while ( mpDealer->Play() );
 	return 0;
 }
 

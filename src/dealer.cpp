@@ -3,6 +3,7 @@
 #include "card.h"
 #include "table.h"
 #include "player.h"
+#include "cardsfuncs.h"
 
 #include <cstdlib>
 #include <cassert>
@@ -23,7 +24,19 @@ Dealer::~Dealer()
 
 int Dealer::Play()
 {
-	return 0;
+	int retval = 0;
+
+	constCardsVec_t vectCards = mpOtherCards;
+	vectCards.push_back( mpVisibleCard );
+	vectCards.push_back( mpHiddenCard );
+
+	if ( CardsFuncs::Sum( vectCards, true ) < 17 || ( CardsFuncs::Sum( vectCards, false ) && mpTable->GetSoftRule() == SOFT_HIT ) )
+	{
+		retval = 1;
+		mpOtherCards.push_back( mpTable->GetCard() );
+	}
+
+	return retval;
 }
 
 void Dealer::DealCards()
@@ -33,6 +46,8 @@ void Dealer::DealCards()
 	std::vector< Player* > players = mpTable->GetPlayers();
 
 	assert( players.size() > 0 );
+
+	mpOtherCards.clear();
 
 	//deal the first card
 	for ( std::vector< Player* >::iterator iter = players.begin(); 
