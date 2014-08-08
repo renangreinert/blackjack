@@ -4,6 +4,7 @@
 #include <vector>
 
 class Table;
+class Player;
 
 class GameManager
 {
@@ -18,9 +19,12 @@ public:
 	virtual ~GameManager();
 
 	void CreateTable( const GameManager::Rules_t& rules );
+
+	void StartGame();
 private:
 
-	std::vector< Table* > mTables;
+	std::vector< Table* > mpTables;
+	std::vector< Player* > mpPlayers;
 
 };
 

@@ -38,7 +38,10 @@ int Table::Play()
 		iter != mpPlayers.end();
 		++iter )
 	{
-		while ( (*iter)->Play() );
+		if ( (*iter)->IsPlaying() )
+		{
+			while ( (*iter)->Play() );
+		}
 	}
 
 	while ( mpDealer->Play() );
@@ -53,7 +56,22 @@ void Table::Restart()
 
 int Table::AddPlayer( Player* player )
 {
-	mpPlayers.push_back( player );
-	player->SetTable( this );
+	if ( mpPlayers.size() < (unsigned int)mMaxPlayers )
+	{
+		mpPlayers.push_back( player );
+	}
 	return 1;
 }
+
+void Table::SetDealer( Dealer* dealer )
+{ 
+	mpDealer = dealer; 
+	mpDealer->SetTable( this ); 
+}
+
+void Table::SetEndOfComposition( int end )
+{
+	mpComposition->SetEnd( end );
+}
+
+

@@ -27,12 +27,17 @@ public:
 	int AddPlayer( Player* player );
 
 	
-
+	void SetMaxPlayers( int maxPlayers ) { mMaxPlayers = maxPlayers; }
+	
 	void SetCards( Composition* composition ){ mpComposition = composition; }
 
 	std::vector< Player* > GetPlayers(){ return mpPlayers; }
 
 	Dealer* GetDealer(){ return mpDealer; }
+
+	void SetDealer( Dealer* dealer );
+
+	void SetEndOfComposition( int end );
 
 	ESoftRule GetSoftRule(){ return mSoftRule; }
 
@@ -41,6 +46,7 @@ private:
 	float			mJackpotPayment;
 	Composition*	mpComposition;
 	Dealer*			mpDealer;
+	int				mMaxPlayers;
 
 	std::vector< Player* > mpPlayers;
 

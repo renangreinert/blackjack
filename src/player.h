@@ -41,9 +41,19 @@ public:
 	////////////////////////////////////////////////////////////
 	int Bet( int value );
 
+	////////////////////////////////////////////////////////////
+	/// Returns true is the player is playing this round or not
+	/// (in other words, if he has placed a bet)
+	////////////////////////////////////////////////////////////
+	bool IsPlaying();
+
+
+	Table* GetTable(){ return mpTable; }
+
 	int Join( Table& table );
 
-	void SetTable( Table* table ){ mpTable = table; }
+
+	void SetMoney( int money ){ mMoney = money; }
 
 	typedef struct pile_t
 	{

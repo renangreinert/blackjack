@@ -16,18 +16,12 @@ Composition::Composition( int numOfDecks )
 	mLastCard = mCards.end();
 }
 
-
-
 Composition::~Composition()
 {
 	DeckFactory::DestroyDeck( mCards );
 }
 
-
-
-
-
-int Composition::GetCard(const Card* card)
+int Composition::GetCard(const Card*& card)
 {
 	int retval = 1;
 
@@ -42,6 +36,7 @@ int Composition::GetCard(const Card* card)
 
 		if ( mCurrentCard <= mLastCard )
 		{
+			++mCurrentCard;
 			retval = 1;
 		}
 		else
@@ -52,7 +47,6 @@ int Composition::GetCard(const Card* card)
 	
 	return retval;
 }
-
 
 int Composition::GetNumOfCards()
 {
@@ -69,8 +63,9 @@ void Composition::SetEnd(int position)
 	mLastCard = mCards.begin() + position;
 }
 
-
 void Composition::Shuffle()
 {
 	std::random_shuffle ( mCards.begin(), mCards.end() );
 }
+
+

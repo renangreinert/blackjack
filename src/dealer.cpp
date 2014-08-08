@@ -54,7 +54,10 @@ void Dealer::DealCards()
 		iter != players.end();
 		++iter )
 	{
-		(*iter)->PushCard( mpTable->GetCard() );
+		if ( (*iter)->IsPlaying() )
+		{
+			(*iter)->PushCard( mpTable->GetCard() );
+		}
 	}
 	mpHiddenCard = mpTable->GetCard();
 
@@ -64,7 +67,10 @@ void Dealer::DealCards()
 		iter != players.end();
 		++iter )
 	{
-		(*iter)->PushCard( mpTable->GetCard() );
+		if ( (*iter)->IsPlaying() )
+		{
+			(*iter)->PushCard( mpTable->GetCard() );
+		}
 	}
 	mpVisibleCard = mpTable->GetCard();
 

@@ -19,7 +19,7 @@ public:
 	/// \retval 0 - If the composition has not finished yet but we've already passed the "last card". 
 	/// \retval -1 - If there are no more cards left. Will return NULL.
 	/////////////////////////////////////////////////////
-	int GetCard(const Card* card);
+	int GetCard(const Card*& card);
 
 	/////////////////////////////////////////////////////
 	/// Returns the quantity of cards of this composition

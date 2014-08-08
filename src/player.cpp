@@ -13,10 +13,12 @@ typedef void (*playfunc_t)( Player&, Player::pile_t& );
 
 static void PlayHit( Player& pPlayer, Player::pile_t& pPile )
 {
+	pPlayer.PushCard( pPlayer.GetTable()->GetCard() );
 }
 
 static void PlayStand( Player& player, Player::pile_t& pPile )
 {
+	pPile.stand = true;
 }
 
 static void PlaySplit( Player& player, Player::pile_t& pPile )
@@ -205,3 +207,9 @@ int Player::Join( Table& table )
 
 	return retval;
 }
+
+bool Player::IsPlaying()
+{
+	return mPiles.size() > 0;
+}
+
