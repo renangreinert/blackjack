@@ -9,22 +9,23 @@ class Player;
 class GameManager
 {
 public:
-	struct Rules_t
-	{
-		int numOfDecks;
-		int numOfPlayers;
-	};
+	
 
 	GameManager();
 	virtual ~GameManager();
 
-	void CreateTable( const GameManager::Rules_t& rules );
+	//void CreateTable( const GameManager::Rules_t& rules );
 
 	void StartGame();
+
+	static GameManager* GetInstance();
 private:
 
 	std::vector< Table* > mpTables;
 	std::vector< Player* > mpPlayers;
+
+	static GameManager* mpInstance;
+
 
 };
 

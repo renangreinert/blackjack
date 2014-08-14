@@ -14,10 +14,20 @@ enum ESoftRule
 	SOFT_HIT
 };
 
+struct Rules_t
+{
+	int numOfDecks;		//!< Number of decks
+	int numOfPlayers;	//!< Number of players allowed per table
+	bool canDouble;
+	bool canSurrender;
+	ESoftRule softRule;
+	float jackpotPayment;
+};
+
 class Table
 {
 public:
-	Table( ESoftRule softRule = SOFT_STAND, float jackpotPayment = 2.0f );
+	Table( const Rules_t& rules );
 	virtual ~Table();
 
 	const Card* GetCard();
@@ -39,16 +49,19 @@ public:
 
 	void SetEndOfComposition( int end );
 
-	ESoftRule GetSoftRule(){ return mSoftRule; }
+	Rules_t GetRules(){ return mRules; }
 
 private:
-	ESoftRule		mSoftRule;
-	float			mJackpotPayment;
+
 	Composition*	mpComposition;
 	Dealer*			mpDealer;
 	int				mMaxPlayers;
 
+	Rules_t			mRules;
+
 	std::vector< Player* > mpPlayers;
+
+
 
 
 };

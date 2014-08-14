@@ -8,43 +8,91 @@
 #include <cassert>
 
 
-//Defines the prototype of the function that will do an action with a player's pile.
-typedef void (*playfunc_t)( Player&, Player::pile_t& );
 
-static void PlayHit( Player& pPlayer, Player::pile_t& pPile )
+
+void Player::PlayHit( Player& pPlayer, Player::pile_t& pPile )
 {
 	pPlayer.PushCard( pPlayer.GetTable()->GetCard() );
 }
 
-static void PlayStand( Player& player, Player::pile_t& pPile )
+void Player::PlayStand( Player& player, Player::pile_t& pPile )
 {
 	pPile.stand = true;
 }
 
-static void PlaySplit( Player& player, Player::pile_t& pPile )
+void Player::PlaySplit( Player& player, Player::pile_t& pPile )
 {
+	pile_t newpile;
+
+	assert( pPile.cards.size() == 2 );
+
+	
+
+	newpile.bet = pPile.bet;
+	///\todo: what to do if the player doesn't have enough money to split?
+	player.mMoney -= pPile.bet.GetValue();
+
+	newpile.stand = false;
+	newpile.cards.push_back( pPile.cards.at( 0 ) );
+
+	//removes one card from the old pile.
+	pPile.cards.pop_back();
+
+	player.mPiles.push_back( newpile );
 }
 
-static void PlayDbl( Player& player, Player::pile_t& pPile )
+void Player::PlayDbl( Player& player, Player::pile_t& pPile )
 {
+	//consider that will only enter here if the player has enough money to double
+	assert( player.mMoney >= pPile.bet.GetValue() );
+
+	player.mMoney -= pPile.bet.GetValue();
+
+	pPile.bet.Double();
 }
 
-static void PlayDblHit( Player& player, Player::pile_t& pPile )
+void Player::PlayDblHit( Player& player, Player::pile_t& pPile )
 {
+	//checks if the player has enough money to double and if doubling is enabled
+	
+	if ( player.mMoney >= pPile.bet.GetValue() && player.GetTable()->GetRules().canDouble )
+	{
+		PlayDbl( player, pPile );
+	}
+	else
+	{
+		PlayHit( player, pPile );
+	}
 }
 
-static void PlayDblStand( Player& player, Player::pile_t& pPile )
+void Player::PlayDblStand( Player& player, Player::pile_t& pPile )
 {
+	if ( player.mMoney >= pPile.bet.GetValue() && player.GetTable()->GetRules().canDouble )
+	{
+		PlayDbl( player, pPile );
+	}
+	else
+	{
+		PlayStand( player, pPile );
+	}
 }
 
-static void PlaySurrender( Player& player, Player::pile_t& pPile )
+void Player::PlaySurrender( Player& player, Player::pile_t& pPile )
 {
+	if ( player.GetTable()->GetRules().canSurrender )
+	{
+		///\todo
+	}
+	else
+	{
+		PlayHit( player, pPile );
+	}
 }
 
 //Decision matrix
 
 //matrix for hard totals (no pair, no Aces)
-playfunc_t matrixHardTotal[21][10] = 
+Player::playfunc_t Player::matrixHardTotal[21][10] = 
 {
 	//Dealer card:
 	// 2				3				4				5				6				7				8				9				10				A			/* sum of player's cards */
@@ -73,7 +121,7 @@ playfunc_t matrixHardTotal[21][10] =
 
 
 //matrix for soft totals (one Ace)
-playfunc_t matrixSoftTotal[10][10] = 
+Player::playfunc_t Player::matrixSoftTotal[10][10] = 
 {
 	//Dealer card:
 	// 2				3				4				5				6				7				8				9				10				A				/* player's card (other than Ace) */
@@ -91,7 +139,7 @@ playfunc_t matrixSoftTotal[10][10] =
 
 
 //matrix for pairs
-playfunc_t matrixPairs[11][10] = 
+Player::playfunc_t Player::matrixPairs[11][10] = 
 {
 	//Dealer card:
 	// 2				3				4				5				6				7				8				9				10				A				/* player's cards */

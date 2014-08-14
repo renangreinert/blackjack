@@ -67,6 +67,25 @@ private:
 	int mMoney;
 	Table* mpTable;	//!< Table where the player is playing
 
+
+
+	//Defines the prototype of the function that will do an action with a player's pile.
+	typedef void (*playfunc_t)( Player&, Player::pile_t& );
+
+	static playfunc_t matrixHardTotal[21][10];
+	static playfunc_t matrixSoftTotal[10][10];
+	static playfunc_t matrixPairs[11][10];
+
+	//static functions for playing the cards:
+	static void PlayHit( Player& pPlayer, Player::pile_t& pPile );
+	static void PlayStand( Player& player, Player::pile_t& pPile );
+	static void PlaySplit( Player& player, Player::pile_t& pPile );	
+	static void PlayDbl( Player& player, Player::pile_t& pPile );	
+	static void PlayDblHit( Player& player, Player::pile_t& pPile );
+	static void PlayDblStand( Player& player, Player::pile_t& pPile );	
+	static void PlaySurrender( Player& player, Player::pile_t& pPile );
+
+	
 };
 
 #endif 

@@ -5,6 +5,8 @@
 #include "dealer.h"
 #include "composition.h"
 
+GameManager* GameManager::mpInstance = NULL;
+
 GameManager::GameManager()
 {
 }
@@ -32,10 +34,19 @@ GameManager::~GameManager()
 	mpPlayers.clear();
 }
 
-void GameManager::CreateTable( const GameManager::Rules_t& rules )
+GameManager* GameManager::GetInstance()
+{
+	if ( mpInstance == NULL )
+	{
+		mpInstance = new GameManager();
+	}
+	return mpInstance;
+}
+
+/*void GameManager::CreateTable( const GameManager::Rules_t& rules )
 {
 	//TODO
-	/*Table* table = new Table();
+	Table* table = new Table();
 	Composition* composition = new Composition( rules.numOfDecks );
 
 	table->SetCards( composition );
@@ -47,16 +58,20 @@ void GameManager::CreateTable( const GameManager::Rules_t& rules )
 		mpPlayers.push_back( player ); 
 	}
 
-	mpTables.push_back( table );*/
-}
+	mpTables.push_back( table );
+}*/
 
 void GameManager::StartGame()
 {
 	Rules_t rules;
-	Table* table = new Table();
 
 	rules.numOfDecks = 8;
 	rules.numOfPlayers = 3;
+	rules.canDouble = true;
+	rules.canSurrender = false;
+
+	Table* table = new Table( rules );
+
 
 	Composition* composition = new Composition( rules.numOfDecks );
 	composition->Shuffle();

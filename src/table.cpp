@@ -4,7 +4,7 @@
 #include "dealer.h"
 #include "composition.h"
 
-Table::Table( ESoftRule softRule, float jackpotPayment ): mSoftRule( softRule ), mJackpotPayment( jackpotPayment )
+Table::Table( const Rules_t& rules ): mRules( rules )
 {
 }
 

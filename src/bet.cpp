@@ -15,17 +15,20 @@ Bet::Bet( int value ): mValue( value )
 
 void Bet::Clear()
 {
+	mValue = 0;
 }
 
 void Bet::Double()
 {
+	mValue *= 2;
 }
 
 const int Bet::GetValue()
 {
-	return 0;
+	return mValue;
 }
 
 void Bet::Set(int value)
 {
+	mValue = value;
 }

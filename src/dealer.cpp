@@ -30,7 +30,7 @@ int Dealer::Play()
 	vectCards.push_back( mpVisibleCard );
 	vectCards.push_back( mpHiddenCard );
 
-	if ( CardsFuncs::Sum( vectCards, true ) < 17 || ( CardsFuncs::Sum( vectCards, false ) && mpTable->GetSoftRule() == SOFT_HIT ) )
+	if ( CardsFuncs::Sum( vectCards, true ) < 17 || ( CardsFuncs::Sum( vectCards, false ) && mpTable->GetRules().softRule == SOFT_HIT ) )
 	{
 		retval = 1;
 		mpOtherCards.push_back( mpTable->GetCard() );
